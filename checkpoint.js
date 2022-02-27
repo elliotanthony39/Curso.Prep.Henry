@@ -7,7 +7,17 @@ function sumaTodosImpares(array) {
   // sumaTodosImpares([1, 5, 2, 9, 6, 4]) devuelve 1 + 5 + 9 = 15
 
   // Tu código aca:
-  
+  var impares = [];
+  var suma = 0;
+  for (let i = 0;i < array.length;i++) {
+    if (array[i] % 2 !== 0) {
+      impares.push(array[i]);
+    }
+  }
+  for (let i = 0;i < impares.length;i++) {
+    suma = suma + impares[i];
+  }
+  return suma;
 }
 
 function stringMasLarga(str) {
@@ -19,7 +29,14 @@ function stringMasLarga(str) {
   // Tip: podes usar el metodo de String 'split'
 
   // Tu código aca:
-
+  var larga = str.split(" ");
+  var primera = larga[0];
+  for (let i = 0;i < larga.length;i++) {
+     if(primera.length < larga[i].length) {
+       primera = larga[i];
+     } 
+  }
+  return primera;
 }
 
 function estaOffline(usuarios, nombre) {
@@ -45,7 +62,16 @@ function estaOffline(usuarios, nombre) {
   // estaOffline(usuarios, 'emi') retorna false
 
   // Tu código aca:
-  
+  var usuario = usuarios;
+  for (var i = 0;i < usuarios.length;i++) {
+    if (usuario[i].nombre === nombre) {
+      if (usuario[i].online === false) {
+        return true;
+      } else if (usuario[i].online === true) {
+        return false;
+      }
+    }
+  }
 }
 
 function actividadesEnComun(persona1, persona2) {
@@ -56,7 +82,14 @@ function actividadesEnComun(persona1, persona2) {
   // actividadesEnComun(persona1, persona2) => ['comer', 'dormir']
   // Tip: podes usar ciclos for anidados.
   // Tu código aca:
-
+  var coinciden = [];
+  
+  for (let actividad of persona1) {
+    if (persona2.includes(actividad)) {
+      coinciden.push(actividad);
+    }
+  }
+  return coinciden;
 }
 
 function buscaDestruye(arreglo, num) {
@@ -68,7 +101,13 @@ function buscaDestruye(arreglo, num) {
   // Ej: buscaDestruye([1, 2, 3, 4, 1], 1) devuelve => [2, 3, 4]
   //
   // Tu código aca:
-
+  var nuevoArreglo = [];
+  for (let numeros of arreglo) {
+    if (numeros !== num) {
+      nuevoArreglo.push(numeros)
+    }
+  }
+  return nuevoArreglo;
 }
 
 function sumarElTipo(arreglo) {
@@ -81,7 +120,11 @@ function sumarElTipo(arreglo) {
   // Tip: podes usar el ciclo for o el metodo de Array 'reduce'
 
   // Tu código aca:
-
+  var obj = {};
+  arreglo.map(function (vehiculo) {
+    obj[vehiculo] ? obj[vehiculo]++ : (obj[vehiculo] = 1)
+  })
+  return obj;
 }
 
 // =======================================================================
@@ -93,7 +136,10 @@ function crearClaseEmprendedor() {
           // Inicializar las propiedades del emprendedor con los valores recibidos como argumento
 
           // Tu código aca:
-
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.libros = libros;
+        this.mascotas = mascotas
       }
 
       addMascota(mascota) {
@@ -101,7 +147,7 @@ function crearClaseEmprendedor() {
         // no debe retornar nada.
 
         // Tu código aca:
-
+        this.mascotas.push(mascota)
       }
 
       getMascotas() {
@@ -111,7 +157,7 @@ function crearClaseEmprendedor() {
           // emprendedor.getMascotas() debería devolver 2
 
           // Tu código aca:
-
+        return this.mascotas.length
       }
 
       addBook(book, autor) {
@@ -120,7 +166,7 @@ function crearClaseEmprendedor() {
           // No debe retornar nada.
 
           // Tu código aca:
-
+        this.libros.push({ nombre: book, autor })
       }
 
       getBooks() {
@@ -130,7 +176,11 @@ function crearClaseEmprendedor() {
           // emprendedor.getBooks() debería devolver ['El señor de las moscas', 'Fundacion']
 
           // Tu código aca:
-
+        var allBooks = [];
+        this.libros.map(function (obj) {
+          allBooks.push(obj["nombre"])
+        })
+        return allBooks;
       }
 
       getFullName() {
@@ -140,7 +190,7 @@ function crearClaseEmprendedor() {
           // emprendedor.getFullName() deberia devolver 'Elon Musk'
 
           // Tu código aca:
-
+        return this.nombre + " " + this.apellido
       }
   }
 
@@ -164,7 +214,14 @@ function mapear() {
   // }) devuelve [2, 3, 4, 5]
 
   // Tu código aca:
-
+  const notMaping = function (cb) {
+    let arr = [];
+    for (let i = 0;i < this.length; i++) {
+      arr.push(cb(this[i], i))
+    }
+    return arr;
+  }
+  Array.prototype.mapear = notMaping
 }
 
 // No modificar nada debajo de esta línea
